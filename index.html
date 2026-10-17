@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harrisburg Islamic Center — Prayer Times, Jumu'ah & Directions | Harrisburg, PA</title>
+<meta name="description" content="Harrisburg Islamic Center (HIX) — A Straight Path. Daily prayer times, Jumu'ah, directions to Suite #105 at 4813 Jonestown Rd, Harrisburg, PA, and how to support the center.">
+<link rel="icon" type="image/png" href="logo-shura-transparent.png">
+<meta property="og:title" content="Harrisburg Islamic Center (HIX)">
+<meta property="og:description" content="Prayer times, Jumu'ah, and directions — 4813 Jonestown Rd, Suite #105, Harrisburg, PA.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://harrisburgislamiccenter.org/">
+<meta name="description" content="Harrisburg Islamic Center (HIX) — a musallah in Harrisburg, PA. Daily congregational prayer times, Jumu'ah, directions to Suite #105 at 4813 Jonestown Rd, and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Amiri+Quran&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0f2e1f;--green:#17573a;--green2:#1f7a4d;--gold:#c9a227;--cream:#faf7ef;--ink:#1c2420;--muted:#5a665f;--card:#fff;--line:#e5e0d0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55}
+  h1,h2,h3,.serif{font-family:'Amiri',Georgia,'Times New Roman',serif;font-weight:normal}
+  a{color:var(--green)}
+  /* sticky header */
+  header.site{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+  .bar{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px 16px}
+  .logo-badge{background:#fff;border-radius:12px;padding:5px 9px;display:flex;align-items:center}
+  .logo-badge img{height:44px;width:auto;display:block}
+  .site-name{font-family:'Amiri',Georgia,serif;font-size:23px;line-height:1.15}
+  .site-name small{display:block;font-family:Arial,sans-serif;font-size:12px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+  nav.main{margin-left:auto;display:flex;gap:18px;align-items:center;font-size:14.5px}
+  nav.main a{color:#fff;text-decoration:none;opacity:.92} nav.main a:hover{opacity:1;text-decoration:underline}
+  .btn{display:inline-block;padding:11px 20px;border-radius:9px;text-decoration:none;font-weight:bold;font-size:15px;border:none;cursor:pointer}
+  .btn-gold{background:var(--gold);color:#231d05}
+  .btn-green{background:var(--green2);color:#fff}
+  .btn-ghost{border:1.5px solid #fff;color:#fff}
+  @media(max-width:760px){nav.main a:not(.btn){display:none}.site-name{font-size:17px}}
+  /* hero */
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,var(--green) 90%);color:#fff}
+  .hero-in{max-width:1080px;margin:0 auto;padding:40px 16px 46px;display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:start}
+  @media(max-width:860px){.hero-in{grid-template-columns:1fr}}
+  .bismillah{font-family:'Amiri Quran','Amiri',Georgia,serif;font-size:27px;color:var(--gold);margin-bottom:12px;line-height:1.6}
+  .hero h1{font-size:44px;line-height:1.15}
+  .hero .tag{margin-top:12px;font-size:17px;opacity:.95;max-width:52ch}
+  .hero .addr{margin-top:14px;font-size:15px;color:var(--gold)}
+  .hero .btns{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+  /* prayer card */
+  .pcard{background:#fff;color:var(--ink);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+  .pcard-head{background:#fff;padding:16px 20px 6px;border-bottom:1px solid var(--line)}
+  .pcard-head .today{font-family:'Amiri',Georgia,serif;font-size:21px;color:var(--navy)}
+  .pcard-head .hijri{font-size:13.5px;color:var(--muted)}
+  .prow{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line)}
+  .prow:last-child{border-bottom:none}
+  .prow .pn{font-size:16.5px}
+  .prow .pt{font-weight:bold;font-size:16.5px;color:var(--navy)}
+  .prow .pt small{font-weight:normal;color:var(--muted);font-size:12.5px;display:block;text-align:right}
+  .jumuah{background:#fdf6da;padding:14px 20px;font-size:15.5px}
+  .jumuah strong{color:var(--navy)}
+  .pcard-foot{padding:10px 20px 14px;font-size:12.5px;color:var(--muted)}
+  main{max-width:1080px;margin:0 auto;padding:36px 16px 8px}
+  section{margin-bottom:42px}
+  h2{font-size:30px;color:var(--navy);border-bottom:2px solid var(--gold);padding-bottom:8px;margin-bottom:16px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .card h3{color:var(--green);font-size:21px;margin-bottom:8px}
+  .todo{background:#fff6d8;border:1px dashed var(--gold);border-radius:8px;padding:10px 14px;font-size:13.5px;margin:12px 0}
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  @media(max-width:760px){.visit{grid-template-columns:1fr}}
+  .visit img{width:100%;border-radius:12px;border:1px solid var(--line)}
+  .donate-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .donate-btns .btn{opacity:.55}
+  footer{background:var(--navy);color:#e9e6da;text-align:center;padding:28px 16px 34px;font-size:14.5px}
+  footer a{color:var(--gold)}
+  footer .flogo{background:#fff;border-radius:12px;display:inline-block;padding:6px 12px;margin-bottom:12px}
+  footer .flogo img{height:52px;display:block}
+.donate-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+    @media(max-width:640px){.donate-grid{grid-template-columns:1fr}}
+    .donate-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-align:center}
+    .donate-card h3{color:var(--green);margin:0 0 4px}
+    .donate-id{font-weight:700;margin:0 0 10px;word-break:break-all}
+    .donate-card img.qr{width:180px;height:180px;object-fit:contain;background:#fff}
+</style>
+</head>
+<body>
+
+
+<header class="site">
+  <div class="bar">
+    <span class="logo-badge"><img src="logo-shura-white.png" alt="Harrisburg Islamic Center logo — Allah calligraphy"></span>
+    <div class="site-name">Harrisburg Islamic Center<small>A Straight Path · HIX</small></div>
+    <nav class="main">
+      <a href="#prayer">Prayer Times</a>
+      <a href="#visit">Visit Us</a>
+      <a href="#announcements">Announcements</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-gold" href="#donate">Donate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="prayer">
+  <div class="hero-in">
+    <div>
+      <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <h1>Assalamu alaikum —<br>welcome to HIX</h1>
+      <p class="tag">The Harrisburg Islamic Center is a musallah serving the Muslim community of Harrisburg and Lower Paxton Township — five daily prayers in congregation, and Jumu'ah every Friday.</p>
+      <div class="addr">4813 Jonestown Rd, Suite #105 · Harrisburg, PA</div>
+      <div class="btns">
+        <a class="btn btn-gold" href="https://maps.app.goo.gl/CXE4iRdwmjrnYyBw6" target="_blank" rel="noopener">Get Directions</a>
+        <a class="btn btn-ghost" href="#visit">First visit? Start here</a>
+      </div>
+    </div>
+
+    <div class="pcard" aria-label="Prayer times">
+      <div class="pcard-head">
+        <div class="today" id="todayLine">Today's Congregational Prayer Times</div>
+        <div class="hijri" id="hijriLine"></div>
+      </div>
+      <div class="prow"><span class="pn">Fajr</span><span class="pt">6:30 AM</span></div>
+      <div class="prow"><span class="pn">Dhuhr</span><span class="pt">1:30 PM</span></div>
+      <div class="prow"><span class="pn">Asr</span><span class="pt">5:00 PM</span></div>
+      <div class="prow"><span class="pn">Maghrib</span><span class="pt">After Adhan</span></div>
+      <div class="prow"><span class="pn">Isha</span><span class="pt">8:30 PM</span></div>
+      <div class="jumuah"><strong>Jumu'ah — Friday:</strong> Adhan <strong>1:15 PM</strong> · Salah <strong>1:30 PM</strong></div>
+      <div class="pcard-foot">Congregational (iqamah) times set by the Center. Times can change with the season — email us to confirm before your first visit.</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section id="visit">
+    <h2>Plan Your Visit — Finding the Musallah</h2>
+    <div class="visit">
+      <div>
+        <p>The musallah is inside an office building, so it helps to know what to look for:</p>
+        <div class="card" style="margin-top:14px">
+          <h3>1 · Find the building</h3>
+          <p>4813 Jonestown Rd, Harrisburg — the sign outside the <strong>building</strong> says <strong>“CHC.”</strong></p>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h3>2 · Find Suite #105</h3>
+          <p>Our <strong>door</strong> carries a blue sign: <strong>“A Straight Path (HIX)”</strong> — pictured here. That is the musallah entrance.</p>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h3>3 · Access</h3>
+          <p>For musallah access instructions before your first visit, email <a href="mailto:HarrisburgIslamicCenter@gmail.com">HarrisburgIslamicCenter@gmail.com</a>, or text / call one of the community admins.</p>
+        </div>
+      </div>
+      <div>
+        <img src="door-sign-a-straight-path-hix.jpg" alt="The musallah door sign: A Straight Path (HIX)">
+        <p style="font-size:13px;color:var(--muted);margin-top:8px">The door sign at Suite #105 — look for this blue “A Straight Path (HIX)” sign.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About the Center</h2>
+    <p>The Harrisburg Islamic Center — <em>A Straight Path (HIX)</em> — serves Muslims in Lower Paxton Township and the greater Harrisburg area of Central Pennsylvania. It is a place for the five daily prayers and the Friday Jumu'ah prayer, and a gathering point for the community through Ramadan, the two Eids, and the year round.</p>
+    <p style="margin-top:10px">Visitors are welcome. If you are new to the area, new to Islam, or simply curious, please come by or reach us by email — we are glad to meet you.</p>
+    <div class="todo"><strong>To be confirmed:</strong> a short history of the Center and its founding, if the Shura council would like one on this page.</div>
+  </section>
+
+  <section id="announcements">
+    <h2>Announcements</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Our website is live</h3>
+        <p>Prayer and Jumu'ah times are posted above and will be updated here whenever they change. Questions: <a href="mailto:HarrisburgIslamicCenter@gmail.com">HarrisburgIslamicCenter@gmail.com</a>.</p>
+      </div>
+      <div class="card">
+        <h3>Ramadan &amp; Eid</h3>
+        <p>Taraweeh, iftar, and Eid prayer details will be announced here in season.</p>
+        <div class="todo" style="margin-bottom:0"><strong>To be confirmed</strong> when dates are set.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="donate">
+    <h2>Support the Center</h2>
+    <p>“The parable of those who spend their substance in the way of Allah is that of a grain of corn: it grows seven ears, and each ear has a hundred grains.” — Qur'an 2:261</p>
+    <p style="margin-top:8px">Your sadaqah and zakat keep the musallah open — rent, utilities, and maintenance.</p>
+    <div class="donate-grid">
+      <div class="donate-card">
+        <h3>Cash App</h3>
+        <p class="donate-id">$5hareef19</p>
+        <img class="qr" src="donate-cashapp-qr.png" alt="Cash App QR code for $5hareef19">
+        <p><a class="btn btn-green" href="https://cash.app/$5hareef19" target="_blank" rel="noopener">Give via Cash App</a></p>
+      </div>
+      <div class="donate-card">
+        <h3>Zelle</h3>
+        <p class="donate-id">HARRISBURG ISLAMIC CENTER</p>
+        <img class="qr" src="donate-zelle-qr.png" alt="Zelle QR code for Harrisburg Islamic Center">
+        <p class="note">Scan with your bank&rsquo;s app &mdash; Zelle ID: astraightpathhix2026</p>
+      </div>
+    </div>
+    <div class="todo"><strong>Waiting on:</strong> the Center's donation links (Adeel is getting them) — each button gets its real link the moment they arrive.</div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Visit</h3>
+        <p>Harrisburg Islamic Center<br>4813 Jonestown Rd, Suite #105<br>Harrisburg, PA</p>
+        <p style="margin-top:8px"><a href="https://maps.app.goo.gl/CXE4iRdwmjrnYyBw6" target="_blank" rel="noopener">Open in Google Maps →</a></p>
+      </div>
+      <div class="card">
+        <h3>Email</h3>
+        <p><a href="mailto:HarrisburgIslamicCenter@gmail.com">HarrisburgIslamicCenter@gmail.com</a></p>
+        <p style="margin-top:8px;font-size:14px;color:var(--muted)">For questions, first-visit access instructions, and community matters.</p>
+      </div>
+    </div>
+    <div class="todo"><strong>To be confirmed:</strong> a phone number, if the Shura council wants one published.</div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="flogo"><img src="logo-shura-white.png" alt="Harrisburg Islamic Center logo"></span><br>
+  Harrisburg Islamic Center · A Straight Path (HIX)<br>
+  4813 Jonestown Rd, Suite #105, Harrisburg, PA · <a href="mailto:HarrisburgIslamicCenter@gmail.com">HarrisburgIslamicCenter@gmail.com</a><br>
+  <span style="opacity:.7">Mockup v5 — October 2026</span>
+</footer>
+
+<script>
+  // Show today's Gregorian + Hijri date in the prayer card (calculated in the visitor's browser, so it never goes stale)
+  try {
+    var now = new Date();
+    var greg = new Intl.DateTimeFormat('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric'}).format(now);
+    document.getElementById('todayLine').textContent = greg;
+    var hijri = new Intl.DateTimeFormat('en-u-ca-islamic', {day:'numeric', month:'long', year:'numeric'}).format(now);
+    document.getElementById('hijriLine').textContent = hijri + ' AH · Congregational prayer times';
+  } catch(e) {
+    document.getElementById('hijriLine').textContent = 'Congregational prayer times';
+  }
+</script>
+
+</body>
+</html>
