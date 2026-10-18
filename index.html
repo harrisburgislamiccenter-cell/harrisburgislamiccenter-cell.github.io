@@ -232,7 +232,17 @@
       var tz = 'America/New_York';
       var greg = new Intl.DateTimeFormat('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric', timeZone:tz}).format(now);
       document.getElementById('todayLine').textContent = greg;
-      var hijri = new Intl.DateTimeFormat('en-u-ca-islamic', {day:'numeric', month:'long', year:'numeric', timeZone:tz}).format(now);
+      // Hijri date: take only the NUMBERS from the device's Islamic calendar and write the month
+      // name ourselves — some phones render the month/era names wrong (e.g. "May 8, 1448 BC AH").
+      var hp = new Intl.DateTimeFormat('en-u-ca-islamic', {day:'numeric', month:'numeric', year:'numeric', timeZone:tz}).formatToParts(now);
+      var hd = '', hm = 0, hy = '';
+      hp.forEach(function (p) {
+        if (p.type === 'day') hd = p.value;
+        if (p.type === 'month') hm = parseInt(p.value, 10);
+        if (p.type === 'year') hy = p.value;
+      });
+      var HMONTHS = ['Muharram','Safar',"Rabi' al-Awwal","Rabi' al-Thani",'Jumada al-Awwal','Jumada al-Thani','Rajab',"Sha'ban",'Ramadan','Shawwal',"Dhul-Qa'dah",'Dhul-Hijjah'];
+      var hijri = (HMONTHS[hm - 1] || '') + ' ' + hd + ', ' + hy + ' AH';
       document.getElementById('hijriLine').textContent = hijri + ' · Congregational prayer times';
       var time = new Intl.DateTimeFormat('en-US', {hour:'numeric', minute:'2-digit', second:'2-digit', hour12:true, timeZone:tz}).format(now);
       document.getElementById('clockLine').textContent = time;
