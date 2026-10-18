@@ -256,10 +256,11 @@
 </script>
 
 <script>
-  // Live prayer times: read from the center's "HIX Prayer Times — Live" Google Sheet.
-  // If the fetch fails for any reason, the built-in times above remain (safe fallback).
+  // Live prayer times: read through the center's update service, which returns exactly what
+  // the "HIX Prayer Times — Live" sheet displays. (Reading the sheet's raw feed drops text
+  // values like "After Adhan".) If the fetch fails, the built-in times above remain.
   (function () {
-    var SHEET_ID = '1arOUutNDBZYY8c0T0BOlWc9DEzbP_a-c4qvobi8PLpo';
+    var TIMES_URL = 'https://script.google.com/macros/s/AKfycbxHkIOQQKYjrUAo7llhM_zaeYn1U4DTOTbzii-mkuQeyRV_APadMJTLYlt8u7o-0UU0Hw/exec';
     var MAP = {
       'Fajr': 'pt-fajr',
       'Dhuhr': 'pt-dhuhr',
@@ -269,23 +270,13 @@
       "Jumu'ah Adhan": 'pt-jumuah-adhan',
       "Jumu'ah Salah": 'pt-jumuah-salah'
     };
-    function cellText(c) {
-      if (!c) return '';
-      if (c.f !== undefined && c.f !== null && String(c.f).trim() !== '') return String(c.f).trim();
-      if (c.v !== undefined && c.v !== null) return String(c.v).trim();
-      return '';
-    }
-    fetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=Times')
-      .then(function (r) { return r.text(); })
-      .then(function (t) {
-        var j = JSON.parse(t.substring(t.indexOf('{'), t.lastIndexOf('}') + 1));
-        var rows = (j.table && j.table.rows) || [];
-        rows.forEach(function (row) {
-          if (!row.c) return;
-          var name = cellText(row.c[0]);
-          var time = cellText(row.c[1]);
-          var id = MAP[name];
-          if (id && time) document.getElementById(id).textContent = time;
+    fetch(TIMES_URL)
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.ok || !j.times) return;
+        Object.keys(MAP).forEach(function (name) {
+          var time = (j.times[name] === undefined || j.times[name] === null) ? '' : String(j.times[name]).trim();
+          if (time) document.getElementById(MAP[name]).textContent = time;
         });
       })
       .catch(function () { /* keep built-in times */ });
