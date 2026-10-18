@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shura — Update Prayer Times | Harrisburg Islamic Center</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="logo-shura-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#1B3158;--gold:#C07010;--ink:#1d2733;--muted:#5b6b7c;--line:#d9dee5;--green:#14532d}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Source Sans 3',system-ui,Arial,sans-serif;color:var(--ink);background:#f4f6f9;line-height:1.55}
+  header{background:var(--navy);color:#fff;padding:26px 20px;text-align:center}
+  header h1{font-family:'Amiri',Georgia,serif;font-size:26px;font-weight:700}
+  header p{color:#cfd9e6;font-size:14.5px;margin-top:4px}
+  main{max-width:560px;margin:26px auto 40px;padding:0 16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 6px 20px rgba(27,49,88,.08)}
+  label{display:block;font-weight:600;font-size:14.5px;margin:14px 0 5px;color:var(--navy)}
+  input[type=text],input[type=password]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:16px;font-family:inherit}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:3px}
+  button{margin-top:22px;width:100%;background:var(--gold);color:#fff;border:none;border-radius:8px;padding:13px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
+  button:disabled{opacity:.6;cursor:wait}
+  #msg{margin-top:16px;padding:12px 14px;border-radius:8px;font-size:15px;display:none}
+  #msg.ok{display:block;background:#e7f4ec;color:var(--green);border:1px solid #bfe3cc}
+  #msg.err{display:block;background:#fdecec;color:#8a1f1f;border:1px solid #f3c2c2}
+  .note{font-size:13.5px;color:var(--muted);margin-top:16px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>Update Prayer Times</h1>
+  <p>Harrisburg Islamic Center — Shura council use</p>
+</header>
+<main>
+  <div class="card">
+    <form id="f" autocomplete="off">
+      <label for="name">Your name</label>
+      <input type="text" id="name" placeholder="e.g., Br. Rizwan">
+      <label for="pw">Shura password *</label>
+      <input type="password" id="pw" required>
+      <div class="hint">Times are pre-filled with the current website values. Change only what is changing, then submit — the website updates itself.</div>
+      <div class="grid">
+        <div><label for="t-fajr">Fajr</label><input type="text" id="t-fajr"></div>
+        <div><label for="t-dhuhr">Dhuhr</label><input type="text" id="t-dhuhr"></div>
+        <div><label for="t-asr">Asr</label><input type="text" id="t-asr"></div>
+        <div><label for="t-maghrib">Maghrib</label><input type="text" id="t-maghrib"></div>
+        <div><label for="t-isha">Isha</label><input type="text" id="t-isha"></div>
+        <div></div>
+        <div><label for="t-jadhan">Jumu'ah — Adhan</label><input type="text" id="t-jadhan"></div>
+        <div><label for="t-jsalah">Jumu'ah — Salah</label><input type="text" id="t-jsalah"></div>
+      </div>
+      <button type="submit" id="btn">Update the website</button>
+      <div id="msg"></div>
+    </form>
+    <p class="note">Changes appear on <a href="https://harrisburgislamiccenter.org">harrisburgislamiccenter.org</a> within a minute or two.</p>
+  </div>
+</main>
+<script>
+  var WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxHkIOQQKYjrUAo7llhM_zaeYn1U4DTOTbzii-mkuQeyRV_APadMJTLYlt8u7o-0UU0Hw/exec';
+  var SHEET_ID = '1arOUutNDBZYY8c0T0BOlWc9DEzbP_a-c4qvobi8PLpo';
+  var FIELDS = {
+    'Fajr': 't-fajr', 'Dhuhr': 't-dhuhr', 'Asr': 't-asr', 'Maghrib': 't-maghrib',
+    'Isha': 't-isha', "Jumu'ah Adhan": 't-jadhan', "Jumu'ah Salah": 't-jsalah'
+  };
+  var current = {};
+  function cellText(c){ if(!c) return ''; if(c.f!=null && String(c.f).trim()!=='') return String(c.f).trim(); if(c.v!=null) return String(c.v).trim(); return ''; }
+  // Pre-fill with the live values from the sheet
+  fetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=Times')
+    .then(function(r){ return r.text(); })
+    .then(function(t){
+      var j = JSON.parse(t.substring(t.indexOf('{'), t.lastIndexOf('}') + 1));
+      ((j.table && j.table.rows) || []).forEach(function(row){
+        if(!row.c) return;
+        var n = cellText(row.c[0]), v = cellText(row.c[1]), id = FIELDS[n];
+        if(id && v){ document.getElementById(id).value = v; current[n] = v; }
+      });
+    })
+    .catch(function(){});
+  document.getElementById('f').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var btn = document.getElementById('btn'), msg = document.getElementById('msg');
+    var times = {}, any = false;
+    Object.keys(FIELDS).forEach(function(k){
+      var v = document.getElementById(FIELDS[k]).value.trim();
+      if(v && v !== (current[k] || '')){ times[k] = v; any = true; }
+    });
+    msg.className = ''; msg.style.display = 'none';
+    if(!any){ msg.className = 'err'; msg.textContent = 'No changes detected — edit at least one time first.'; return; }
+    btn.disabled = true; btn.textContent = 'Updating…';
+    fetch(WEB_APP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ password: document.getElementById('pw').value, name: document.getElementById('name').value.trim(), times: times })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      btn.disabled = false; btn.textContent = 'Update the website';
+      if(res.ok){
+        msg.className = 'ok';
+        msg.textContent = 'Jazakum Allahu khayran — updated: ' + res.changed.join(', ') + '. The website will show the new time(s) within a minute or two.';
+        Object.keys(times).forEach(function(k){ current[k] = times[k]; });
+        document.getElementById('pw').value = '';
+      } else {
+        msg.className = 'err'; msg.textContent = res.error || 'Something went wrong — please try again.';
+      }
+    })
+    .catch(function(){
+      btn.disabled = false; btn.textContent = 'Update the website';
+      msg.className = 'err'; msg.textContent = 'Could not reach the update service — please try again in a moment.';
+    });
+  });
+</script>
+</body>
+</html>
