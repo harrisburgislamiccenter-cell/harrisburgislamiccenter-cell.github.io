@@ -67,6 +67,10 @@
   .todo{background:#fff6d8;border:1px dashed var(--gold);border-radius:8px;padding:10px 14px;font-size:13.5px;margin:12px 0}
   .visit{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
   @media(max-width:760px){.visit{grid-template-columns:1fr}}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px}
+  .gallery figure{margin:0}
+  .gallery img{width:100%;height:210px;object-fit:cover;border-radius:10px;display:block}
+  .gallery figcaption{font-size:13.5px;color:var(--muted);margin-top:6px;text-align:center}
   .visit img{width:100%;border-radius:12px;border:1px solid var(--line)}
   .donate-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
   .donate-btns .btn{opacity:.55}
@@ -153,6 +157,22 @@
         <img src="door-sign-a-straight-path-hix.jpg" alt="The musallah door sign: A Straight Path (HIX)">
         <p style="font-size:13px;color:var(--muted);margin-top:8px">The door sign at Suite #105 — look for this blue “A Straight Path (HIX)” sign.</p>
       </div>
+    </div>
+    <h3 style="margin-top:26px">See the Musallah</h3>
+    <p>A look inside, so you know the space before you arrive:</p>
+    <div class="gallery">
+      <figure>
+        <img src="gallery-musallah.jpg" alt="The empty musallah — prayer rows facing the front of the room">
+        <figcaption>The musallah</figcaption>
+      </figure>
+      <figure>
+        <img src="gallery-jumuah.jpg" alt="The community standing together for Jumu'ah prayer">
+        <figcaption>Jumu'ah prayer</figcaption>
+      </figure>
+      <figure>
+        <img src="gallery-divider.jpg" alt="Inside the musallah — prayer rows and the woven partition">
+        <figcaption>Inside the musallah</figcaption>
+      </figure>
     </div>
   </section>
 
