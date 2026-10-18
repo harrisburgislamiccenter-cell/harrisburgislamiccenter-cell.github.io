@@ -24,9 +24,10 @@
   .hint{font-size:12.5px;color:var(--muted);margin-top:3px}
   button{margin-top:22px;width:100%;background:var(--gold);color:#fff;border:none;border-radius:8px;padding:13px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
   button:disabled{opacity:.6;cursor:wait}
-  #msg{margin-top:16px;padding:12px 14px;border-radius:8px;font-size:15px;display:none}
+  #msg{margin:0 0 6px;padding:12px 14px;border-radius:8px;font-size:15px;display:none}
   #msg.ok{display:block;background:#e7f4ec;color:var(--green);border:1px solid #bfe3cc}
   #msg.err{display:block;background:#fdecec;color:#8a1f1f;border:1px solid #f3c2c2}
+  #msg.info{display:block;background:#eef3fa;color:var(--navy);border:1px solid #c3d3ea}
   .note{font-size:13.5px;color:var(--muted);margin-top:16px;text-align:center}
 </style>
 </head>
@@ -38,6 +39,7 @@
 <main>
   <div class="card">
     <form id="f" autocomplete="off">
+      <div id="msg"></div>
       <label for="name">Your name *</label>
       <input type="text" id="name" placeholder="e.g., Br. Rizwan" required>
       <label for="pw">Shura password *</label>
@@ -54,7 +56,6 @@
         <div><label for="t-jsalah">Jumu'ah — Salah</label><input type="text" id="t-jsalah"></div>
       </div>
       <button type="submit" id="btn">Update the website</button>
-      <div id="msg"></div>
     </form>
     <p class="note">Changes appear on <a href="https://harrisburgislamiccenter.org">harrisburgislamiccenter.org</a> within a minute or two.</p>
   </div>
@@ -87,11 +88,17 @@
     });
     function showMsg(kind, text){
       msg.className = kind; msg.textContent = text;
-      if(msg.scrollIntoView) msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // The message sits at the TOP of the form (phones: the keyboard/bottom placement hid it).
+      // Dismiss the keyboard and bring the top of the page into view so it cannot be missed.
+      if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+      try { window.scrollTo(0, 0); } catch(e) {}
+      if(msg.scrollIntoView) msg.scrollIntoView({ block: 'start' });
     }
     msg.className = ''; msg.style.display = 'none';
     if(!document.getElementById('name').value.trim()){ showMsg('err', 'Please enter your name.'); return; }
+    if(!document.getElementById('pw').value){ showMsg('err', 'Please enter the Shura password.'); return; }
     if(!any){ showMsg('err', 'No changes detected — edit at least one time first.'); return; }
+    showMsg('info', 'Updating… one moment.');
     btn.disabled = true; btn.textContent = 'Updating…';
     fetch(WEB_APP_URL, {
       method: 'POST',
