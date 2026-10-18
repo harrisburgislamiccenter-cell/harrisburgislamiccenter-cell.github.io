@@ -118,12 +118,12 @@
         <div class="hijri" id="hijriLine"></div>
         <div class="clock">Harrisburg time · <span id="clockLine">—</span></div>
       </div>
-      <div class="prow"><span class="pn">Fajr</span><span class="pt">6:30 AM</span></div>
-      <div class="prow"><span class="pn">Dhuhr</span><span class="pt">1:30 PM</span></div>
-      <div class="prow"><span class="pn">Asr</span><span class="pt">5:00 PM</span></div>
-      <div class="prow"><span class="pn">Maghrib</span><span class="pt">After Adhan</span></div>
-      <div class="prow"><span class="pn">Isha</span><span class="pt">8:15 PM</span></div>
-      <div class="jumuah"><strong>Jumu'ah — Friday:</strong> Adhan <strong>1:15 PM</strong> · Salah <strong>1:30 PM</strong></div>
+      <div class="prow"><span class="pn">Fajr</span><span class="pt" id="pt-fajr">6:30 AM</span></div>
+      <div class="prow"><span class="pn">Dhuhr</span><span class="pt" id="pt-dhuhr">1:30 PM</span></div>
+      <div class="prow"><span class="pn">Asr</span><span class="pt" id="pt-asr">5:00 PM</span></div>
+      <div class="prow"><span class="pn">Maghrib</span><span class="pt" id="pt-maghrib">After Adhan</span></div>
+      <div class="prow"><span class="pn">Isha</span><span class="pt" id="pt-isha">8:15 PM</span></div>
+      <div class="jumuah"><strong>Jumu'ah — Friday:</strong> Adhan <strong id="pt-jumuah-adhan">1:15 PM</strong> · Salah <strong id="pt-jumuah-salah">1:30 PM</strong></div>
       <div class="pcard-foot">Congregational (iqamah) times set by the Center. Times can change with the season — email us to confirm before your first visit.</div>
     </div>
   </div>
@@ -253,6 +253,43 @@
   }
   hixTick();
   setInterval(hixTick, 1000);
+</script>
+
+<script>
+  // Live prayer times: read from the center's "HIX Prayer Times — Live" Google Sheet.
+  // If the fetch fails for any reason, the built-in times above remain (safe fallback).
+  (function () {
+    var SHEET_ID = '1arOUutNDBZYY8c0T0BOlWc9DEzbP_a-c4qvobi8PLpo';
+    var MAP = {
+      'Fajr': 'pt-fajr',
+      'Dhuhr': 'pt-dhuhr',
+      'Asr': 'pt-asr',
+      'Maghrib': 'pt-maghrib',
+      'Isha': 'pt-isha',
+      "Jumu'ah Adhan": 'pt-jumuah-adhan',
+      "Jumu'ah Salah": 'pt-jumuah-salah'
+    };
+    function cellText(c) {
+      if (!c) return '';
+      if (c.f !== undefined && c.f !== null && String(c.f).trim() !== '') return String(c.f).trim();
+      if (c.v !== undefined && c.v !== null) return String(c.v).trim();
+      return '';
+    }
+    fetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=Times')
+      .then(function (r) { return r.text(); })
+      .then(function (t) {
+        var j = JSON.parse(t.substring(t.indexOf('{'), t.lastIndexOf('}') + 1));
+        var rows = (j.table && j.table.rows) || [];
+        rows.forEach(function (row) {
+          if (!row.c) return;
+          var name = cellText(row.c[0]);
+          var time = cellText(row.c[1]);
+          var id = MAP[name];
+          if (id && time) document.getElementById(id).textContent = time;
+        });
+      })
+      .catch(function () { /* keep built-in times */ });
+  })();
 </script>
 
 </body>
