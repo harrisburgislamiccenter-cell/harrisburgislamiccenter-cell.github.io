@@ -233,7 +233,7 @@
       var greg = new Intl.DateTimeFormat('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric', timeZone:tz}).format(now);
       document.getElementById('todayLine').textContent = greg;
       var hijri = new Intl.DateTimeFormat('en-u-ca-islamic', {day:'numeric', month:'long', year:'numeric', timeZone:tz}).format(now);
-      document.getElementById('hijriLine').textContent = hijri + ' AH · Congregational prayer times';
+      document.getElementById('hijriLine').textContent = hijri + ' · Congregational prayer times';
       var time = new Intl.DateTimeFormat('en-US', {hour:'numeric', minute:'2-digit', second:'2-digit', hour12:true, timeZone:tz}).format(now);
       document.getElementById('clockLine').textContent = time;
     } catch(e) {
