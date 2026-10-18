@@ -49,6 +49,7 @@
   .pcard-head{background:#fff;padding:16px 20px 6px;border-bottom:1px solid var(--line)}
   .pcard-head .today{font-family:'Amiri',Georgia,serif;font-size:21px;color:var(--navy)}
   .pcard-head .hijri{font-size:13.5px;color:var(--muted)}
+  .pcard-head .clock{font-size:15.5px;font-weight:700;color:var(--gold);margin-top:3px}
   .prow{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line)}
   .prow:last-child{border-bottom:none}
   .prow .pn{font-size:16.5px}
@@ -115,6 +116,7 @@
       <div class="pcard-head">
         <div class="today" id="todayLine">Today's Congregational Prayer Times</div>
         <div class="hijri" id="hijriLine"></div>
+        <div class="clock">Harrisburg time · <span id="clockLine">—</span></div>
       </div>
       <div class="prow"><span class="pn">Fajr</span><span class="pt">6:30 AM</span></div>
       <div class="prow"><span class="pn">Dhuhr</span><span class="pt">1:30 PM</span></div>
@@ -222,16 +224,25 @@
 </footer>
 
 <script>
-  // Show today's Gregorian + Hijri date in the prayer card (calculated in the visitor's browser, so it never goes stale)
-  try {
-    var now = new Date();
-    var greg = new Intl.DateTimeFormat('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric'}).format(now);
-    document.getElementById('todayLine').textContent = greg;
-    var hijri = new Intl.DateTimeFormat('en-u-ca-islamic', {day:'numeric', month:'long', year:'numeric'}).format(now);
-    document.getElementById('hijriLine').textContent = hijri + ' AH · Congregational prayer times';
-  } catch(e) {
-    document.getElementById('hijriLine').textContent = 'Congregational prayer times';
+  // Live date + clock in the prayer card: Gregorian date, Hijri (Islamic) date, and the current
+  // Harrisburg time, refreshed every second in the visitor's browser so it never goes stale.
+  function hixTick() {
+    try {
+      var now = new Date();
+      var tz = 'America/New_York';
+      var greg = new Intl.DateTimeFormat('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric', timeZone:tz}).format(now);
+      document.getElementById('todayLine').textContent = greg;
+      var hijri = new Intl.DateTimeFormat('en-u-ca-islamic', {day:'numeric', month:'long', year:'numeric', timeZone:tz}).format(now);
+      document.getElementById('hijriLine').textContent = hijri + ' AH · Congregational prayer times';
+      var time = new Intl.DateTimeFormat('en-US', {hour:'numeric', minute:'2-digit', second:'2-digit', hour12:true, timeZone:tz}).format(now);
+      document.getElementById('clockLine').textContent = time;
+    } catch(e) {
+      var hl = document.getElementById('hijriLine');
+      if (hl && !hl.textContent) hl.textContent = 'Congregational prayer times';
+    }
   }
+  hixTick();
+  setInterval(hixTick, 1000);
 </script>
 
 </body>
