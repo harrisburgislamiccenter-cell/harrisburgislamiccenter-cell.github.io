@@ -38,8 +38,8 @@
 <main>
   <div class="card">
     <form id="f" autocomplete="off">
-      <label for="name">Your name</label>
-      <input type="text" id="name" placeholder="e.g., Br. Rizwan">
+      <label for="name">Your name *</label>
+      <input type="text" id="name" placeholder="e.g., Br. Rizwan" required>
       <label for="pw">Shura password *</label>
       <input type="password" id="pw" required>
       <div class="hint">Times are pre-filled with the current website values. Change only what is changing, then submit — the website updates itself.</div>
@@ -85,8 +85,13 @@
       var v = document.getElementById(FIELDS[k]).value.trim();
       if(v && v !== (current[k] || '')){ times[k] = v; any = true; }
     });
+    function showMsg(kind, text){
+      msg.className = kind; msg.textContent = text;
+      if(msg.scrollIntoView) msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     msg.className = ''; msg.style.display = 'none';
-    if(!any){ msg.className = 'err'; msg.textContent = 'No changes detected — edit at least one time first.'; return; }
+    if(!document.getElementById('name').value.trim()){ showMsg('err', 'Please enter your name.'); return; }
+    if(!any){ showMsg('err', 'No changes detected — edit at least one time first.'); return; }
     btn.disabled = true; btn.textContent = 'Updating…';
     fetch(WEB_APP_URL, {
       method: 'POST',
@@ -97,17 +102,16 @@
     .then(function(res){
       btn.disabled = false; btn.textContent = 'Update the website';
       if(res.ok){
-        msg.className = 'ok';
-        msg.textContent = 'Jazakum Allahu khayran — updated: ' + res.changed.join(', ') + '. The website will show the new time(s) within a minute or two.';
+        showMsg('ok', 'Jazakum Allahu khayran — updated: ' + res.changed.join(', ') + '. The website will show the new time(s) within a minute or two.');
         Object.keys(times).forEach(function(k){ current[k] = times[k]; });
         document.getElementById('pw').value = '';
       } else {
-        msg.className = 'err'; msg.textContent = res.error || 'Something went wrong — please try again.';
+        showMsg('err', res.error || 'Something went wrong — please try again.');
       }
     })
     .catch(function(){
       btn.disabled = false; btn.textContent = 'Update the website';
-      msg.className = 'err'; msg.textContent = 'Could not reach the update service — please try again in a moment.';
+      showMsg('err', 'Could not reach the update service — please try again in a moment.');
     });
   });
 </script>
