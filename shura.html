@@ -61,22 +61,19 @@
 </main>
 <script>
   var WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxHkIOQQKYjrUAo7llhM_zaeYn1U4DTOTbzii-mkuQeyRV_APadMJTLYlt8u7o-0UU0Hw/exec';
-  var SHEET_ID = '1arOUutNDBZYY8c0T0BOlWc9DEzbP_a-c4qvobi8PLpo';
   var FIELDS = {
     'Fajr': 't-fajr', 'Dhuhr': 't-dhuhr', 'Asr': 't-asr', 'Maghrib': 't-maghrib',
     'Isha': 't-isha', "Jumu'ah Adhan": 't-jadhan', "Jumu'ah Salah": 't-jsalah'
   };
   var current = {};
-  function cellText(c){ if(!c) return ''; if(c.f!=null && String(c.f).trim()!=='') return String(c.f).trim(); if(c.v!=null) return String(c.v).trim(); return ''; }
-  // Pre-fill with the live values from the sheet
-  fetch('https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=Times')
-    .then(function(r){ return r.text(); })
-    .then(function(t){
-      var j = JSON.parse(t.substring(t.indexOf('{'), t.lastIndexOf('}') + 1));
-      ((j.table && j.table.rows) || []).forEach(function(row){
-        if(!row.c) return;
-        var n = cellText(row.c[0]), v = cellText(row.c[1]), id = FIELDS[n];
-        if(id && v){ document.getElementById(id).value = v; current[n] = v; }
+  // Pre-fill with the live values from the update service (returns the sheet's displayed values)
+  fetch(WEB_APP_URL)
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(!j || !j.ok || !j.times) return;
+      Object.keys(FIELDS).forEach(function(k){
+        var v = (j.times[k] === undefined || j.times[k] === null) ? '' : String(j.times[k]).trim();
+        if(v){ document.getElementById(FIELDS[k]).value = v; current[k] = v; }
       });
     })
     .catch(function(){});
