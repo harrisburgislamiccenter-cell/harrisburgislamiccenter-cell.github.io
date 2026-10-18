@@ -87,6 +87,7 @@
       if(v && v !== (current[k] || '')){ times[k] = v; any = true; }
     });
     function showMsg(kind, text){
+      msg.style.display = ''; // clear the inline hide — the class rules below control visibility
       msg.className = kind; msg.textContent = text;
       // The message sits at the TOP of the form (phones: the keyboard/bottom placement hid it).
       // Dismiss the keyboard and bring the top of the page into view so it cannot be missed.
