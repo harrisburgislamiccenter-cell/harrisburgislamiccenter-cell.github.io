@@ -84,6 +84,25 @@
     .donate-card h3{color:var(--green);margin:0 0 4px}
     .donate-id{font-weight:700;margin:0 0 10px;word-break:break-all}
     .donate-card img.qr{width:180px;height:180px;object-fit:contain;background:#fff}
+  .featured{grid-column:1/-1;border:1.5px solid var(--gold)}
+  .featured h3{font-size:24px}
+  .steps{margin:12px 0 4px 20px}
+  .steps li{margin-bottom:8px}
+  .tagchip{display:inline-block;background:#fdf6da;border:1px solid var(--gold);color:var(--navy);border-radius:20px;padding:2px 12px;font-size:13px;font-weight:bold;margin-bottom:10px}
+  .event{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;grid-template-columns:104px 1fr 300px;gap:20px;align-items:start}
+  @media(max-width:860px){.event{grid-template-columns:84px 1fr}.event .flyer{grid-column:1/-1}}
+  .datebadge{background:var(--green);color:#fff;border-radius:12px;text-align:center;padding:12px 6px}
+  .datebadge .dow{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:bold}
+  .datebadge .day{font-family:'Amiri',Georgia,serif;font-size:40px;line-height:1.05}
+  .datebadge .mon{font-size:13.5px}
+  .event h3{color:var(--green);font-size:23px;margin-bottom:4px}
+  .event .host{font-size:14px;color:var(--muted);margin-bottom:8px}
+  .event .meta{font-size:15px;margin-bottom:8px}
+  .event .meta strong{color:var(--navy)}
+  .event ul{margin:8px 0 8px 20px}
+  .event ul li{margin-bottom:4px}
+  .event .flyer img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+  .event .note{font-size:13.5px;color:var(--muted);font-style:italic;margin-top:10px}
 </style>
 </head>
 <body>
@@ -97,6 +116,7 @@
       <a href="#prayer">Prayer Times</a>
       <a href="#visit">Visit Us</a>
       <a href="#announcements">Announcements</a>
+      <a href="#events">Events</a>
       <a href="#contact">Contact</a>
       <a class="btn btn-gold" href="#donate">Donate</a>
     </nav>
@@ -185,6 +205,28 @@
   <section id="announcements">
     <h2>Announcements</h2>
     <div class="cards">
+      <div class="card featured">
+        <span class="tagchip">New</span>
+        <h3>Redirect Your PA Taxes to Al-Huda School — EITC Program (Fall 2026)</h3>
+        <p>Assalamu alaikum wa rahmatullah,</p>
+        <p style="margin-top:8px">Through Pennsylvania's <strong>Educational Improvement Tax Credit (EITC)</strong> program, you can redirect part of the PA state tax you already owe to scholarships at <strong>Al-Huda School PA</strong>, through the Central Pennsylvania Scholarship Fund (CPSF). Al-Huda School receives the full amount you designate — you effectively donate about <strong>6.3%</strong>, and the Commonwealth of PA provides the other <strong>93.7%</strong> on your behalf.</p>
+        <p style="margin-top:8px">The minimum designation is <strong>$3,500</strong> of PA state tax liability (roughly $100,000 combined household income), and you may designate a different amount. Business owners, S-Corp / C-Corp / LLC shareholders, partners, the self-employed, and W-2 employees can all participate.</p>
+        <video controls preload="metadata" poster="eitc-video-poster.jpg" src="eitc-al-huda-video.mp4" style="width:100%;border-radius:10px;margin-top:14px;background:#000"></video>
+        <p style="font-size:13.5px;color:var(--muted);margin-top:6px">Watch: How the EITC program works — presented for Al-Huda School PA (about 4½ minutes).</p>
+        <p style="margin-top:10px"><strong>How to apply — step by step:</strong></p>
+        <ol class="steps">
+          <li>Fill out the <strong>Fall 2026 Joinder Agreement</strong> and email it to <a href="mailto:tami@cpsfcharity.org">tami@cpsfcharity.org</a>. On the form, you may name Al-Huda School PA in the optional school designation section.</li>
+          <li>You will receive a confirmation email from the Central Pennsylvania Scholarship Fund (CPSF).</li>
+          <li>CPSF will ask for a check for your designated amount, to be sent in <strong>November or at the beginning of December 2026</strong>.</li>
+          <li>Write the check exactly as CPSF instructs — and on the memo line, make sure to write: <strong>"EITC fund for Al-Huda PA."</strong></li>
+          <li>In <strong>February 2027</strong>, you will receive a K-1 form for your contribution.</li>
+          <li>File the K-1 form with your tax return through your accountant so you can claim the credit for your contribution.</li>
+          <li>That's all — EITC is simply the PA state tax you already pay to the Commonwealth of Pennsylvania, redirected to benefit our children's education.</li>
+        </ol>
+        <p style="margin-top:12px">Questions? Contact <strong>Brother Shah</strong> at <a href="tel:+17176143049">(717) 614-3049</a>, or <strong>Tami Clark</strong>, Executive Director of CPSF, at <a href="tel:+18146829035">(814) 682-9035</a> / <a href="mailto:tami@cpsfcharity.org">tami@cpsfcharity.org</a>.</p>
+        <p style="margin-top:14px"><a class="btn btn-gold" href="Fall-2026-Joinder-Agreement.pdf">Download the Fall 2026 Joinder Agreement (PDF)</a></p>
+        <p style="margin-top:10px">Jazakum'Allahu khairan.</p>
+      </div>
       <div class="card">
         <h3>Our website is live</h3>
         <p>Prayer and Jumu'ah times are posted above and will be updated here whenever they change. Questions: <a href="mailto:HarrisburgIslamicCenter@gmail.com">HarrisburgIslamicCenter@gmail.com</a>.</p>
@@ -196,6 +238,38 @@
     </div>
     <p style="margin-top:14px">Have an announcement for the community? Submit it for review — approved announcements are posted here.</p>
     <p style="margin-top:10px"><a class="btn btn-gold" href="https://forms.gle/JEZSH5opmEt2igfUA" target="_blank" rel="noopener">Submit an Announcement</a></p>
+  </section>
+
+  <section id="events">
+    <h2>Events</h2>
+    <p style="margin-bottom:16px">Gatherings at the Center and events from our wider community — shared so families don't miss out.</p>
+    <div class="event">
+      <div class="datebadge">
+        <div class="dow">Saturday</div>
+        <div class="day">31</div>
+        <div class="mon">October 2026</div>
+      </div>
+      <div>
+        <span class="tagchip">Community Event</span>
+        <h3>Babas, Bikes &amp; Beautiful Cars</h3>
+        <p class="host">An IQRA Father &amp; Family Community Event — Iqra Academy, in collaboration with Khair Community Center</p>
+        <p class="meta"><strong>Time:</strong> 1:00 PM – 4:00 PM<br>
+        <strong>Location:</strong> IQRA Academy, 1079 Egypt Rd, Phoenixville, PA 19460</p>
+        <p>Let's rev up the fun! Bring your Baba, your family, and your favorite ride for an afternoon featuring cars, motorcycles, and family fun. No special car or motorcycle needed — everyone is welcome: luxury, classic, custom, sports cars, trucks, and motorcycles.</p>
+        <ul>
+          <li>Car &amp; Motorcycle Showcase</li>
+          <li>People's Choice Awards</li>
+          <li>Food Truck on site</li>
+          <li>Car Care &amp; "What's Under the Hood?"</li>
+          <li>Baba &amp; Me Photo Spot</li>
+          <li>Prizes &amp; Giveaways</li>
+        </ul>
+        <p><em>Rides. Roots. Relationships.</em></p>
+        <p class="note">Shared for our community — this event is hosted by Iqra Academy in Phoenixville, not by Harrisburg Islamic Center.</p>
+      </div>
+      <div class="flyer"><img src="event-flyer-iqra-car-show-2026-10-31.jpg" alt="Babas, Bikes and Beautiful Cars event flyer"></div>
+    </div>
+    <p style="margin-top:14px">Hosting a community event? Send it through the announcement form above — approved events will be posted here.</p>
   </section>
 
   <section id="donate">
